@@ -26,7 +26,6 @@ public class FirstSpawn extends JavaPlugin implements Listener {
         createPluginFolder();
         getConfig().options().copyDefaults(true);
         saveConfig();
-        this.getDescription().getPermissions();
         getServer().getPluginManager().registerEvents(this, this);
         if ((getConfig().getString("location.world")).equals("NotConfigured")) {
             World defWorld = getServer().getWorlds().get(0);
@@ -137,10 +136,6 @@ public class FirstSpawn extends JavaPlugin implements Listener {
                     if (!sender.hasPermission(sendPerm)) {
                         sender.sendMessage(prefix + ChatColor.RED + "You do not have permission for that command.");
                         return true;
-                    }
-                    else {
-                        sender.sendMessage(prefix + ChatColor.RED + "You do not have permission for that command.");
-                        return true; 
                     }
                 }
                 Player player = getServer().getPlayerExact(args[0]);

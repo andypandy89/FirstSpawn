@@ -14,5 +14,7 @@ permissions:
   firstspawn.spawn:
     description: Allow players to spawn with /newspawn
   firstspawn.send:
-    description: Allow players to send others to /newspawn
+    description: Allow sender to send others to /newspawn
+  firstspawn.reload:
+    description: Allow sender to reload configuration.
   
