@@ -7,10 +7,12 @@ description: ${project.description}
 commands:
   firstspawn:
       description: FirstSpawn commands
-      usage: /firstspawn help
+      usage: /<command> help
 permissions:
   firstspawn.set:
     description: Sets the spawn point for newcomers
   firstspawn.spawn:
     description: Allow players to spawn with /newspawn
+  firstspawn.send:
+    description: Allow players to send others to /newspawn
   
