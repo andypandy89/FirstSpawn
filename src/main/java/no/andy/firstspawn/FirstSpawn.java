@@ -17,7 +17,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FirstSpawn extends JavaPlugin implements Listener {
-    public String prefix = ChatColor.GRAY + "[" + ChatColor.GREEN + "FirstSpawn" + ChatColor.GRAY + "] ";
     private File pluginFolder = new File("plugins/FirstSpawn");
     public final Logger log = Logger.getLogger("Minecraft");
 
@@ -37,7 +36,7 @@ public class FirstSpawn extends JavaPlugin implements Listener {
             getConfig().set("location.yaw", loc.getYaw());
             getConfig().set("location.pitch", loc.getPitch());
             saveConfig();
-            this.log.info("[FirstSpawn] First spawn location set to current spawn in default world.");
+            this.log.info("[" + this.getDescription().getName() + "] First spawn location set to current spawn in default world.");
         }
     }
     
@@ -61,6 +60,7 @@ public class FirstSpawn extends JavaPlugin implements Listener {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
             if (cmd.getName().equalsIgnoreCase("firstspawn")) {
+                String prefix = ChatColor.GRAY + "[" + ChatColor.GREEN + this.getDescription().getName() + ChatColor.GRAY + "] ";
                 Player player = (Player) sender;
                 if (args.length == 0) {
                     if (!sender.hasPermission("firstspawn.spawn")) {
@@ -68,7 +68,7 @@ public class FirstSpawn extends JavaPlugin implements Listener {
                         return true;
                     }
                     else {
-                        sender.sendMessage(ChatColor.WHITE + "Teleporting to first spawn...");
+                        sender.sendMessage(prefix + ChatColor.WHITE + "Teleporting to first spawn...");
                         player.teleport(new Location(Bukkit.getWorld(getConfig().getString("location.world")), getConfig().getDouble("location.x"), getConfig().getDouble("location.y"), getConfig().getDouble("location.z"), (float) getConfig().getDouble("location.yaw"), (float) getConfig().getDouble("location.pitch")));
                         return true;
                     }
