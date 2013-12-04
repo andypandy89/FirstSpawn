@@ -43,7 +43,7 @@ public class FirstSpawn extends JavaPlugin implements Listener {
     
     @Override
     public void onDisable(){
-        
+        getServer().getScheduler().cancelTasks(this);
     }
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
