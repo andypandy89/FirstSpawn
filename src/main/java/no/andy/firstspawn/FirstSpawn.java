@@ -1,6 +1,7 @@
 package no.andy.firstspawn;
 
 import java.io.File;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class FirstSpawn extends JavaPlugin implements Listener {
     private File pluginFolder = new File("plugins/FirstSpawn");
-    public final Logger log = Logger.getLogger("Minecraft");
+    public static final Logger log = Logger.getLogger("Minecraft");
 
     @Override
     public void onEnable(){
@@ -36,7 +37,7 @@ public class FirstSpawn extends JavaPlugin implements Listener {
             getConfig().set("location.yaw", loc.getYaw());
             getConfig().set("location.pitch", loc.getPitch());
             saveConfig();
-            this.log.info("[" + this.getDescription().getName() + "] First spawn location set to current spawn in default world.");
+            FirstSpawn.log.log(Level.INFO, "[{0}] First spawn location set to current spawn in default world.", this.getDescription().getName());
         }
     }
     
@@ -100,6 +101,7 @@ public class FirstSpawn extends JavaPlugin implements Listener {
     public void playerLogin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
         if (!player.hasPlayedBefore() && getConfig().getDouble("location.x") != 0) {
+            // Reason for waiting two ticks before execution is to make sure other plugins don't get in the way.
             getServer().getScheduler().runTaskLater(this, new Runnable() {
 
                 public void run() {
