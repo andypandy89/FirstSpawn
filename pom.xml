@@ -8,7 +8,8 @@
   <packaging>jar</packaging>
 
   <name>FirstSpawn</name>
-  <url>http://maven.apache.org</url>
+  <description>Redirection of spawn for new players.</description>
+  <url>http://www.ultimateminecraft.net</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

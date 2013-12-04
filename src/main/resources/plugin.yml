@@ -1,8 +1,9 @@
-name: FirstSpawn
+name: ${project.artifactId}
 main: no.andy.firstspawn.FirstSpawn
-version: 0.1
+version: ${project.version}
+website: ${project.url}
 author: andypandy89
-description: Sends new players to a specified location
+description: ${project.description}
 commands:
   firstspawn:
       description: FirstSpawn commands
