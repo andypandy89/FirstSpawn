@@ -1,0 +1,15 @@
+name: FirstSpawn
+main: no.andy.firstspawn.FirstSpawn
+version: 0.1
+author: andypandy89
+description: Sends new players to a specified location
+commands:
+  firstspawn:
+      description: FirstSpawn commands
+      usage: /firstspawn help
+permissions:
+  firstspawn.set:
+    description: Sets the spawn point for newcomers
+  firstspawn.spawn:
+    description: Allow players to spawn with /newspawn
+  
