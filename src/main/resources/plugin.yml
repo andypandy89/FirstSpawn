@@ -1,15 +1,20 @@
-name: FirstSpawn
+name: ${project.artifactId}
 main: no.andy.firstspawn.FirstSpawn
-version: 0.1
+version: ${project.version}
+website: ${project.url}
 author: andypandy89
-description: Sends new players to a specified location
+description: ${project.description}
 commands:
   firstspawn:
       description: FirstSpawn commands
-      usage: /firstspawn help
+      usage: /<command> help
 permissions:
   firstspawn.set:
     description: Sets the spawn point for newcomers
   firstspawn.spawn:
     description: Allow players to spawn with /newspawn
+  firstspawn.send:
+    description: Allow sender to send others to /newspawn
+  firstspawn.reload:
+    description: Allow sender to reload configuration.
   
