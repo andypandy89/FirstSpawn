@@ -1,6 +1,7 @@
 package no.andy.firstspawn;
 
 import java.io.File;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
@@ -48,8 +49,8 @@ public class FirstSpawn extends JavaPlugin implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
         if (!event.getPlayer().hasPlayedBefore() && !getConfig().getString("location.world").equals("NotConfigured")) {
-            String command = event.getMessage().toLowerCase();
-            if (command.startsWith("/spawn")) {
+            String command = event.getMessage().split(" ")[0].replace("/","").toLowerCase(Locale.ENGLISH);
+            if (command.equals("spawn")) {
                 event.setMessage("/firstspawn");
                 event.setCancelled(true);
                 tpToFirstSpawn(event.getPlayer());
@@ -102,15 +103,18 @@ public class FirstSpawn extends JavaPlugin implements Listener {
                     return false;
                 }
             } 
-            else if (args.length == 1 && args[0].equalsIgnoreCase("help")) {
+            else if (args[0].equalsIgnoreCase("help")) {
                 sender.sendMessage(ChatColor.WHITE + "----------------" + ChatColor.GRAY + "[" + ChatColor.GREEN + this.getDescription().getName() + " Help Menu " + ChatColor.GRAY + "]" + ChatColor.WHITE + "----------------");
                 if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    if (!player.hasPlayedBefore()) {
+                        sender.sendMessage(ChatColor.GREEN + "/spawn" + ChatColor.WHITE + " - " + ChatColor.GRAY + "Teleports you to first spawn.");                    }
                     if (sender.hasPermission(spawnPerm)) {
                         sender.sendMessage(ChatColor.GREEN + "/firstspawn" + ChatColor.WHITE + " - " + ChatColor.GRAY + "Teleports you to first spawn.");
                     }
                 }
                 if(sender.hasPermission(sendPerm)) {
-                    sender.sendMessage(ChatColor.GREEN + "/firstspawn <player>" + ChatColor.WHITE + " - " + ChatColor.GRAY + "Teleports specified player to first spawn.");
+                    sender.sendMessage(ChatColor.GREEN + "/firstspawn <player>" + ChatColor.WHITE + " - " + ChatColor.GRAY + "Teleports player to first spawn.");
                 }
                 if(sender instanceof Player && sender.hasPermission(setPerm)) {
                     sender.sendMessage(ChatColor.GREEN + "/firstspawn set" + ChatColor.WHITE + " - " + ChatColor.GRAY + "Sets the first spawn at current location.");
