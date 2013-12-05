@@ -6,10 +6,3 @@ location:
     z: 0
     yaw: 0.0
     pitch: 0.0
-override-spawn-command: false
-world-config:
-    all-worlds: true
-    enable-world-whitelist: false
-    world-whitelist: []
-    enable-world-blacklist: false
-    world-blacklist: []
