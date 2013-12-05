@@ -139,6 +139,9 @@ public class FirstSpawn extends JavaPlugin implements Listener {
                     return true;
                 }
             }
+            else {
+                sender.sendMessage(prefix + ChatColor.RED + "Invalid syntax. Please see /firstspawn help for command syntax.");
+            }
         }
         return false;
     }
