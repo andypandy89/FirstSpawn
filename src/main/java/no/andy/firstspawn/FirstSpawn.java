@@ -30,14 +30,7 @@ public class FirstSpawn extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
         if ((getConfig().getString("location.world")).equals("NotConfigured")) {
             World defWorld = getServer().getWorlds().get(0);
-            Location loc = defWorld.getSpawnLocation();
-            getConfig().set("location.world", loc.getWorld().getName());
-            getConfig().set("location.x", loc.getX());
-            getConfig().set("location.y", loc.getY());
-            getConfig().set("location.z", loc.getZ());
-            getConfig().set("location.yaw", loc.getYaw());
-            getConfig().set("location.pitch", loc.getPitch());
-            saveConfig();
+            setFirstSpawn(defWorld.getSpawnLocation());
             FirstSpawn.log.log(Level.INFO, "[{0}] First spawn location set to current spawn in default world.", this.getDescription().getName());
         }
     }
@@ -85,14 +78,7 @@ public class FirstSpawn extends JavaPlugin implements Listener {
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
                     if (sender.hasPermission(setPerm)) {
-                        Location loc = player.getLocation();
-                        getConfig().set("location.world", loc.getWorld().getName());
-                        getConfig().set("location.x", loc.getX());
-                        getConfig().set("location.y", loc.getY());
-                        getConfig().set("location.z", loc.getZ());
-                        getConfig().set("location.yaw", loc.getYaw());
-                        getConfig().set("location.pitch", loc.getPitch());
-                        saveConfig();
+                        setFirstSpawn(player.getLocation());
                         sender.sendMessage(prefix + ChatColor.WHITE + "Set first spawn point.");
                         return true;
                     } else {
@@ -100,7 +86,8 @@ public class FirstSpawn extends JavaPlugin implements Listener {
                         return true;
                     }
                 } else {
-                    return false;
+                    sender.sendMessage(prefix + ChatColor.RED + "Set-command must be run from a player context.");
+                    return true;
                 }
             } 
             else if (args[0].equalsIgnoreCase("help")) {
@@ -186,5 +173,14 @@ public class FirstSpawn extends JavaPlugin implements Listener {
         Location dest = new Location(w, x, y, z, yaw, pitch);
         p.sendMessage(prefix + ChatColor.WHITE + "Teleporting to first spawn...");
         p.teleport(dest);
+    }
+    public void setFirstSpawn(Location loc) {
+        getConfig().set("location.world", loc.getWorld().getName());
+        getConfig().set("location.x", loc.getX());
+        getConfig().set("location.y", loc.getY());
+        getConfig().set("location.z", loc.getZ());
+        getConfig().set("location.yaw", loc.getYaw());
+        getConfig().set("location.pitch", loc.getPitch());
+        saveConfig();
     }
 }
