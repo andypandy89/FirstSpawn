@@ -44,6 +44,9 @@ public class FirstSpawn extends JavaPlugin implements Listener {
         if (!event.getPlayer().hasPlayedBefore() && !getConfig().getString("location.world").equals("NotConfigured")) {
             String command = event.getMessage().split(" ")[0].replace("/","").toLowerCase(Locale.ENGLISH);
             if (command.equals("spawn")) {
+                if (event.getPlayer().hasPermission("firstspawn.override")) {
+                    return;
+                }
                 event.setMessage("/firstspawn");
                 event.setCancelled(true);
                 tpToFirstSpawn(event.getPlayer());
@@ -157,6 +160,9 @@ public class FirstSpawn extends JavaPlugin implements Listener {
     public void playerLogin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
         if (!player.hasPlayedBefore() && !getConfig().getString("location.world").equals("NotConfigured")) {
+            if (player.hasPermission("firstspawn.override")) {
+               return;
+            }
             // Reason for waiting two ticks before execution is to make sure other plugins don't get in the way.
             getServer().getScheduler().runTaskLater(this, new Runnable() {
                 public void run() {

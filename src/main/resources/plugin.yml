@@ -17,4 +17,6 @@ permissions:
     description: Allow sender to send others to /newspawn
   firstspawn.reload:
     description: Allow sender to reload configuration.
+  firstspawn.override:
+    description: Players with this permission-node will be ignored by FirstSpawn
   
